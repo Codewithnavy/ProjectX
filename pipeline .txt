@@ -1,0 +1,25 @@
+pipeline {
+    
+       agent any
+     triggers {
+             gitpush() 
+            }
+
+  stages {
+  stage ('checkout') {
+  steps {
+  git branch : 'main', url : ' repository url'
+ }
+  stage ('print commit id')
+  steps {
+   script {
+          def commitID = sh(returnstdout : true, script: 'git rev-parse HEAD').trim()
+echo "commit ID : ${commitID}"
+}
+
+}
+
+}
+
+}
+}
